@@ -33,7 +33,6 @@ public class UserController {
         User principal = userService.로그인(loginReqDto);
         session.setAttribute("principal", principal);
         return "redirect:/";
-
     }
 
     @PostMapping("join")

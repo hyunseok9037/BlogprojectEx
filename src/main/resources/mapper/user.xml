@@ -23,7 +23,7 @@
 
     <insert id="insert">
         insert into user_tb (username, password, email, created_at) values(#{username}, #{password}, #{email}, now())
-    </insert>    
+    </insert> 
 
     <delete id="deleteById" >
         delete from user_tb where id = #{id} 
