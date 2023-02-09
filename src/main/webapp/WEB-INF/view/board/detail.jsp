@@ -31,10 +31,10 @@
                     </div>
                     <div class="card-footer">
                         <button type="button" id="btn-reply-save" class="btn btn-primary">등록</button>
-                    </div>
                 </form>
-            </div>
+                    </div>
             <br />
+            </div>
             <div class="card">
                 <div class="card-header">댓글 리스트</div>
                 <ul id="reply-box" class="list-group">
