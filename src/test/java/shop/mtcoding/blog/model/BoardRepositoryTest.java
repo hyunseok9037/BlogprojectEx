@@ -21,7 +21,7 @@ public class BoardRepositoryTest {
     @Test
     public void findAllWithUser_test() throws Exception {
         // given
-        ObjectMapper om = new ObjectMapper();
+        ObjectMapper om = new ObjectMapper(); // Jackson
 
         // when
         List<BoardMainRespDto> BoardMainRespDto = boardRepository.findAllWithUser();
