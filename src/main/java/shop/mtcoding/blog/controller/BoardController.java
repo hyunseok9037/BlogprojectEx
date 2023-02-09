@@ -51,12 +51,13 @@ public class BoardController {
 
     @GetMapping({ "/", "/board" })
     public String main(Model model) {
-        model.addAttribute("dtos", boardRepository.findAllWithUser());
+        model.addAttribute("dtos", boardRepository.findByIdWithUser());
         return "board/main";
     }
 
     @GetMapping("/board/{id}")
-    public String detail(@PathVariable int id) {
+    public String detail(@PathVariable int id, Model model) {
+        model.addAttribute("dto", boardRepository.findByIdWithUser(id));
         return "board/detail";
     }
 
