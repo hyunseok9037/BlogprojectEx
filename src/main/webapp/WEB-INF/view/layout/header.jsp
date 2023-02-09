@@ -29,13 +29,18 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
+                        <c:choose>
+                           <c:when test="${principal == null}">
+                           <li class="nav-item">
                                 <a class="nav-link" href="/loginForm">로그인</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/joinForm">회원가입</a>
                             </li>
-                            <li class="nav-item">
+                           </c:when>
+                        
+                           <c:otherwise>
+                           <li class="nav-item">
                                 <a class="nav-link" href="/board/saveForm">글쓰기</a>
                             </li>
                             <li class="nav-item">
@@ -44,6 +49,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/logout">로그아웃</a>
                             </li>
+                           </c:otherwise>
+                        </c:choose>
+                            
                         </ul>
                         <div>
                             <a href="/user/profileUpdate"><img src="/images/profile.jfif" style="width: 35px;"

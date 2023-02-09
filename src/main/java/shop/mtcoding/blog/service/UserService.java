@@ -17,15 +17,17 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional
-    public int 회원가입(joinReqDto joinReqDto) {
+    public void 회원가입(joinReqDto joinReqDto) {
         User sameUser = userRepository.findByUsername(joinReqDto.getUsername());
         if (sameUser != null) {
             throw new CustomException("동일한 username이 존재합니다");
         }
         int result = userRepository.insert(joinReqDto.getUsername(), joinReqDto.getPassword(), joinReqDto.getEmail());
+
         return result;
     }
 
+    @Transactional(readOnly = true)
     public User 로그인(LoginReqDto loginReqDto) {
         User principal = userRepository.findByUsernameAndPassword(
                 loginReqDto.getUsername(), loginReqDto.getPassword());
@@ -34,5 +36,4 @@ public class UserService {
         }
         return principal;
     };
-
-}
+};
