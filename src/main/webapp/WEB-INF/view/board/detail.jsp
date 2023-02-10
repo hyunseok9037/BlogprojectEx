@@ -5,7 +5,7 @@
         <div class="container my-3">
             <div class="mb-3">
                 <a href="/board/1/updateForm" class="btn btn-warning">수정</a>
-                <button id="btn-delete" class="btn btn-danger">삭제</button>
+                <button onclick="deleteById(${dto.id})" class="btn btn-danger">삭제</button>
             </div>
         </c:if>
 
@@ -48,5 +48,21 @@
                 </ul>
             </div>
         </div>
+
+        <script>
+    function deleteById(id){
+        $.ajax({
+            type:"delete",
+            url:"/board/"+id,
+            dataType:"json"
+        }).done((res)=>{ // 20X 일때
+            alert(res.msg);
+            location.href="/";
+        }).fail((err)=>{ // 40X, 50X 일때
+            alert(err.responseJSON.msg);
+        });
+    }
+</script>
+
 
         <%@ include file="../layout/footer.jsp" %>

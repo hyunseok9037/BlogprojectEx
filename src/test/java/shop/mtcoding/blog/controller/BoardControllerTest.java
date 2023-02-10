@@ -1,6 +1,7 @@
 package shop.mtcoding.blog.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.blog.dto.board.BoardResp;
+import shop.mtcoding.blog.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.blog.model.User;
 
 @Transactional
@@ -51,6 +53,40 @@ public class BoardControllerTest {
 
 		mockSession = new MockHttpSession();
 		mockSession.setAttribute("principal", user);
+	}
+
+	@Test
+	public void delete_test() throws Exception {
+		// given
+		int id = 1;
+
+		// when
+		ResultActions resultActions = mvc.perform(
+				delete("/board/" + id).session(mockSession));
+		String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+		System.out.println("테스트 : " + responseBody);
+
+		// then
+		resultActions.andExpect(status().isOk());
+	}
+
+	@Test
+	public void detail_test() throws Exception {
+		// given
+		int id = 1;
+
+		// when
+		ResultActions resultActions = mvc.perform(
+				get("/board/" + id));
+		Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
+		BoardDetailRespDto dto = (BoardDetailRespDto) map.get("dto");
+		String model = om.writeValueAsString(dto);
+		System.out.println("테스트 : " + model);
+		// then
+		resultActions.andExpect(status().isOk());
+		assertThat(dto.getUsername()).isEqualTo("ssar");
+		assertThat(dto.getUserId()).isEqualTo(1);
+		assertThat(dto.getTitle()).isEqualTo("1번째 제목");
 	}
 
 	@Test
