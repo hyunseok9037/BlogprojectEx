@@ -64,7 +64,7 @@ public class BoardControllerTest {
 		ResultActions resultActions = mvc.perform(
 				delete("/board/" + id).session(mockSession));
 		String responseBody = resultActions.andReturn().getResponse().getContentAsString();
-		System.out.println("테스트 : " + responseBody);
+		System.out.println("delete_test : " + responseBody);
 
 		// then
 		resultActions.andExpect(status().isOk());
@@ -99,7 +99,7 @@ public class BoardControllerTest {
 		Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
 		List<BoardResp.BoardMainRespDto> dtos = (List<BoardResp.BoardMainRespDto>) map.get("dtos");
 		String model = om.writeValueAsString(dtos);
-		System.out.println("테스트 : " + model);
+		System.out.println("main_test : " + model);
 
 		// then
 		resultActions.andExpect(status().isOk());
@@ -123,6 +123,8 @@ public class BoardControllerTest {
 						.content(requestBody)
 						.contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 						.session(mockSession));
+
+		System.out.println("save_test : ");
 
 		// then
 		resultActions.andExpect(status().is3xxRedirection());
