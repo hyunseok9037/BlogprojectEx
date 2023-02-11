@@ -4,8 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shop.mtcoding.blog.model.BoardRepository">
-
-<select id="findAllWithUser" resultType="shop.mtcoding.blog.dto.board.BoardResp$BoardMainRespDto">
+    <select id="findAllWithUser" resultType="shop.mtcoding.blog.dto.board.BoardResp$BoardMainRespDto">
         select bt.id, bt.title, bt.thumbnail, ut.username
         from board_tb bt
         inner join user_tb ut
@@ -29,11 +28,11 @@
     </select>    
 
     <insert id="insert">
- insert into board_tb (title, content, thumbnail, user_id, created_at) values(#{title}, #{content}, #{thumbnail}, #{userId}, now())
+        insert into board_tb (title, content, thumbnail, user_id, created_at) values(#{title}, #{content}, #{thumbnail}, #{userId}, now())
     </insert>    
 
     <delete id="deleteById" >
-        delete from board_tb where id = #{id} 
+        delete from board_tb where id = #{id}
     </delete>    
 
     <update id="updateById" >

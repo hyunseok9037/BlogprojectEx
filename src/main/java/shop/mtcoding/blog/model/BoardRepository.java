@@ -10,6 +10,7 @@ import shop.mtcoding.blog.dto.board.BoardResp.BoardMainRespDto;
 
 @Mapper
 public interface BoardRepository {
+
         public BoardDetailRespDto findByIdWithUser(int id);
 
         public List<BoardMainRespDto> findAllWithUser();
